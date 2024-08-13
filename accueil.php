@@ -16,6 +16,7 @@
         .text-orange {
             color: orange;
         }
+   
     </style>
 </head>
   <body>
@@ -24,9 +25,8 @@
             <div class="container  mt-3">
             
             <div class="dropdown float-end">
-            <button  class="btn btn-icon btn-transparent-dark text-white order-1 order-lg-0 me-2 ms-lg-2 me-lg-0">paramètre
-            </div>
-            
+            <button  class="btn btn-icon btn-transparent-dark text-white order-1 order-lg-0 me-2 ms-lg-2 me-lg-0">paramètre</button>
+    </div>   
 <img src="images/logo.cnps2.jpeg" class="rounded" alt="" width="100" height="100">
 
 
@@ -76,6 +76,7 @@
     </div>
    
     </nav>
+
     <div class="row text-white">
         <div class="col-4">
         

@@ -1,26 +1,28 @@
 <?php
-
 include("system_appel/config.php");
 
 $message = '';
 
-if (isset($_POST['username']) && isset($_POST['password'])) {
-    $username = $_POST["nom d'tulisateur"];
-    $password = password_hash($_POST["mot de passe"], PASSWORD_DEFAULT);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Hacher le mot de passe
     $Email = $_POST['Email'];
 
-    $sql = "INSERT INTO users (Email, username, password) VALUES (:email, :nom d'utilisateur, :mot de passe)";
-    $stmt = $pdo->prepare($sql);
-    $result = $stmt->execute(['email' => $email, "nom d'utilisateur" => $username, 'mot de passe ' => $password]);
+    $sql = "INSERT INTO utilisateur (username, password, email) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sss", $username, $password, $Email);
 
-    if ($result) {
-        $message = 'compte créer avec succès';
-        header('Location: login.php');
-    } else {
-        $message = 'Erreur lors de la création du compte';
+    if ($stmt->execute()) {
+        echo "Inscription réussie";
+    } else {echo "Erreur : " . $sql . "<br>" . $conn->error;
     }
+
+  
 }
+
+
 ?>
+
 <!doctype.html>
 <html lang="fr">
 <head>
@@ -45,15 +47,15 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                                                 <div class="col-md-6">
                                                   
                                                     <div class="mb-3">
-                                                        <label class="small mb-1" for="inputFirstName">nom d'utilisateur</label>
-                                                        <input class="form-control" id="inputFirstName" type="text" placeholder="Entrer un nom">
+                                                        <label class="small mb-1" for="inputusername">nom d'utilisateur</label>
+                                                        <input class="form-control" id="username" type="text" placeholder="Entrer un nom">
                                                     </div>
                                                 </div>
         
                                         
                                             <div class="mb-3">
-                                                <label class="small mb-1" for="inputEmailAddress">Email</label>
-                                                <input class="form-control" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Entrer un addresse mail">
+                                                <label class="small mb-1" for="inputEmail">Email</label>
+                                                <input class="form-control" id="inputEmail" type="email" aria-describedby="emailHelp" placeholder="Entrer un addresse mail">
                                                 <div class="invalid-feedback">Veuillez remplir ce champ.</div>
                                               </div>
                                       

@@ -41,17 +41,16 @@
                                     <div class="card-header">Changer votre mot de passe</div>
                                     <div class="card-body">
                                         <form>
-                                            <!-- Form Group (current password)-->
                                             <div class="mb-3">
                                                 <label class="small mb-1" for="currentPassword">Mot de passe actuel</label>
                                                 <input class="form-control" id="currentPassword" type="password" placeholder="Enter current password">
                                             </div>
-                                            <!-- Form Group (new password)-->
+                                       
                                             <div class="mb-3">
                                                 <label class="small mb-1" for="newPassword">nouveau mot de passe </label>
                                                 <input class="form-control" id="newPassword" type="password" placeholder="Enter new password">
                                             </div>
-                                            <!-- Form Group (confirm password)-->
+                                         
                                             <div class="mb-3">
                                                 <label class="small mb-1" for="confirmPassword">confirmer le mot de passe </label>
                                                 <input class="form-control" id="confirmPassword" type="password" placeholder="Confirm new password">
@@ -60,11 +59,11 @@
                                         </form>
                                     </div>
                                 </div>
-                                <!-- Security preferences card-->
+                            
                                 <div class="card mb-4">
                                     <div class="card-header">Préférences de sécurité</div>
                                     <div class="card-body">
-                                        <!-- Account privacy optinos-->
+                                     
                                         <h5 class="mb-1">compte privé</h5>
                                         <p class="small text-muted"> En définissant votre compte sur privé, les informations de votre profil et vos publications ne seront pas visibles par les utilisateurs en dehors de votre groupe d'utilisateurs..</p>
                                         <form>

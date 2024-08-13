@@ -1,4 +1,37 @@
 
+<?php
+
+include("system_appel/config.php");
+
+
+if (isset($_POST['Email']) && isset($_POST['password'])) {
+    $Email = $_POST['Email'];
+    $password = $_POST['password'];
+
+    $sql = "SELECT * FROM utilisateur WHERE Email = :Email";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['Email' => $Email]);
+    $stmt->bindParam(':Email', $Email);
+    $stmt->execute();
+    $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
+    var_dump($utilisateur);
+
+
+
+if ($utilisateur && password_verify($password, $utilisateur['password'])) {
+    $_SESSION['utilisateur_ID'] = $utilisateur['ID'];
+    session_commit();
+    header('Location:accueil.php');
+    exit;   
+} 
+else {
+  
+    $error_message = "Vérifiez votre email ou mot de passe.";
+    echo($error_message);
+}
+}
+?>
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -29,16 +62,15 @@
                                     <div class="card-header justify-content-center"><h3 class="fw-light my-4">se connecter</h3></div>
                                     <div class="card-body">
                                     
-                                        <form method="POST" action="config.php">
-                                     
+                                    <form method="POST" action="login.php">
                                             <div class="mb-3">
-                                                <label class="small mb-1" for="inpututilisateur">Email</label>
-                                                <input class="form-control" id="inpututilisateur" type="email" placeholder="Enter email address">
+                                                <label class="small mb-1" for="inputEmail">Email</label>
+                                                <input class="form-control"   id="Email" name="Email" type="Email" placeholder="Enter email address" required>
                                             </div>
                                           
                                             <div class="mb-3">
-                                                <label class="small mb-1" for="inputPassword" >mot de passe</label>
-                                                <input class="form-control" id="inputPassword" type="mot de passe" placeholder="Enter un mot de passe" >
+                                                <label class="small mb-1"  for="inputpassword" >mot de passe</label>
+                                                <input class="form-control"   id="password"  name="password" type="password" placeholder="Enter un mot de passe" required>
                                                 
                                             </div>
                                
@@ -49,10 +81,12 @@
                                                 </div>
                                             </div>
                                        
-                                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <a class="small" href="auth-password-basic.html">mot de passe oublié?</a>
-                                                <a href="acceuil.php" class="btn btn-primary  " >connexion</a>
+                                            <div class="btn-end">
+                                            
+                                            <input  type="submit" class="btn btn-success" float-end value="connexion">
+                                           
                                             </div>
+                                           
                                         </form>
                                     </div>
                                   

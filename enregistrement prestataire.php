@@ -1,7 +1,37 @@
+
+<?php
+
+include("system_appel/config.php");
+
+$message = '';
+
+if (isset($_POST['nom']) && isset($_POST['prenom'])  && isset($_POST['Adresse'])&& isset($_POST['telephone']) && isset($_POST['Email']) ) {
+    $username = $_POST['username'];
+  
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $Adresse = $_POST['Adresse'];
+    $telephone = $_POST['telephone'];
+    $email = $_POST['email'];
+  
+
+    $sql = "INSERT INTO prestataire (nom,prenom,Adresse,telephone,Email) VALUES (:nom, :prenom,:Adresse,:telephone,:Eamil)";
+    $stmt = $pdo->prepare($sql);
+    $result = $stmt->execute(['nom' => $nom,'prenom' => $prenom,'Adresse' => $Adresse,'telephone' => $telephone,'Email' => $Email,  ]);
+
+    if ($result) {
+        $message = 'Inscription réussie!';
+        header('Location: login.php');
+    } else {
+        $message = 'Erreur lors de l\'inscription.';
+    }
+}
+?>
+
 <!doctype html>
 <html lang="fr">
 <head>
-  <title>page formulaire prestataire</title>
+  <title>enregistrer prestataire</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">

@@ -1,13 +1,14 @@
 <?php
 session_start();
 
-// Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+
+if (!isset($_SESSION['utilisateur_ID'])) {
+    header('Location: index.php');
     exit;
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -49,7 +50,7 @@ if (!isset($_SESSION['user_id'])) {
 <div class="dashboard-container">
     <h2>Bienvenue sur votre tableau de bord</h2>
     <p>Vous pouvez maintenant accéder à toutes les fonctionnalités réservées à nos utilisateurs inscrits.</p>
-  <a href="login.php">se deconnecter</a>
+    <a href="logout.php">Se déconnecter</a>
 </div>
 
 </body>
