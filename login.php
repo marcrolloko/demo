@@ -5,6 +5,7 @@ include("system_appel/config.php");
 
 
 if (isset($_POST['Email']) && isset($_POST['password'])) {
+
     $Email = $_POST['Email'];
     $password = $_POST['password'];
 
@@ -13,22 +14,21 @@ if (isset($_POST['Email']) && isset($_POST['password'])) {
     $stmt->execute(['Email' => $Email]);
     $stmt->bindParam(':Email', $Email);
     $stmt->execute();
-    $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
-    var_dump($utilisateur);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC,);
+    
 
+        if (isset($user) && $password==$user['password']) {
 
+            session_start();
+            $_SESSION['user_ID'] = $user['ID'];
 
-if ($utilisateur && password_verify($password, $utilisateur['password'])) {
-    $_SESSION['utilisateur_ID'] = $utilisateur['ID'];
-    session_commit();
-    header('Location:accueil.php');
-    exit;   
-} 
-else {
-  
-    $error_message = "Vérifiez votre email ou mot de passe.";
-    echo($error_message);
-}
+            //var_dump("je suis icic");exit;
+
+            header('Location: accueil.php');
+
+        }else {
+            echo 'Email ou mot de passe incorrect.';
+        }
 }
 ?>
 
@@ -69,9 +69,8 @@ else {
                                             </div>
                                           
                                             <div class="mb-3">
-                                                <label class="small mb-1"  for="inputpassword" >mot de passe</label>
-                                                <input class="form-control"   id="password"  name="password" type="password" placeholder="Enter un mot de passe" required>
-                                                
+                                            <label class="small mb-1" for="inputpassword">mot de passe </label>
+                                            <input class="form-control"   id="password" name="password" type="password" placeholder="Enter mot de passe" required>
                                             </div>
                                
                                             <div class="mb-3">
@@ -83,7 +82,7 @@ else {
                                        
                                             <div class="btn-end">
                                             
-                                            <input  type="submit" class="btn btn-success" float-end value="connexion">
+                                            <input  type="submit"  class="btn btn-success" float-end value="connexion">
                                            
                                             </div>
                                            
